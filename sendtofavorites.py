@@ -4,7 +4,6 @@ import os
 
 @Client.on_message(fox_command("sendtofavorites", "Favorites", os.path.basename(__file__), "[Message/Reply]") & fox_sudo())
 async def send_to_favorites(client, message):
-    # Проверяем, есть ли ответ на сообщение
     reply_message = message.reply_to_message
     
     try:
