@@ -8,22 +8,21 @@ async def send_to_favorites(client, message):
 
     try:
         if reply_message:
+            # Check if the reply message has text
             text_to_send = reply_message.text if reply_message.text else "Received media."
-            await client.send_message("me", f"📩 New Favorite Message:\n{text_to_send}",
-                                       reply_to_message_id=reply_message.id)  # Используем reply_message.id
+            await client.send_message("me", f"📩 New Favorite Message:\n{text_to_send}")
 
+            # Check if the reply message has media
             if reply_message.media:
                 await client.send_document("me", reply_message.document.file_id,
-                                            caption="📩 New Favorite Media",
-                                            reply_to_message_id=reply_message.id)  # Используем reply_message.id
+                                            caption="📩 New Favorite Media")
             await message.edit("📩 Sent to favorites.")
-            return
-        
-        command_text = message.text.split(" ", 1)
-        if len(command_text) > 1:
-            await client.send_message("me", command_text[1])
         else:
-            await message.edit("📩 No text provided to send to favorites.")
+            command_text = message.text.split(" ", 1)
+            if len(command_text) > 1:
+                await client.send_message("me", command_text[1])
+            else:
+                await message.edit("📩 No text provided to send to favorites.")
 
     except Exception as e:
         await message.edit(f"❌ An error occurred: {str(e)}")
