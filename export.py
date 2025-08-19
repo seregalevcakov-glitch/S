@@ -3,7 +3,7 @@ from command import fox_command, fox_sudo, who_message
 import json
 import os
 
-@Client.on_message(fox_command("exportchats", "Export All Contact Chats", __file__) & fox_sudo())
+@Client.on_message(fox_command("exportchats", "Export", __file__) & fox_sudo())
 async def export_all_chats(client, message):
     message = await who_message(client, message)
 
