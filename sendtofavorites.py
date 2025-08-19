@@ -14,7 +14,7 @@ async def send_to_favorites(client, message):
 
             # Check if the reply message has media
             if reply_message.media:
-                await client.send_document("me", reply_.id,
+                await client.send_document("me", reply_message.id,
                                             caption="📩 New Favorite Media")
             await message.edit("📩 Sent to favorites.")
         else:
