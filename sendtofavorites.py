@@ -3,7 +3,7 @@ from command import fox_command, fox_sudo, who_message
 import os
 import asyncio
 
-@Client.on_message(fox_command("sendtofavorites", "Send to Favorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
+@Client.on_message(fox_command("sendtofavorites", "SendToFavorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
 async def send_to_favorites(client, message):
     message = await who_message(client, message)
     reply_message = message.reply_to_message
