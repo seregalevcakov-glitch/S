@@ -1,4 +1,4 @@
-rom pyrogram import Client
+from pyrogram import Client
 from command import fox_command, fox_sudo, who_message
 import os
 import asyncio
