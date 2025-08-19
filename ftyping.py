@@ -58,7 +58,7 @@ async def get_messages(client, message):
         await message.edit(f"❌ Ошибка: {str(e)}")
 
 
-@Client.on_message(fox_command("getlast", "Get Last Message", os.path.basename(__file__)) & fox_sudo())
+@Client.on_message(fox_command("getlast", "GetLastMessage", os.path.basename(__file__)) & fox_sudo())
 async def get_last_message(client, message):
     message = await who_message(client, message)
 
@@ -81,7 +81,7 @@ async def get_last_message(client, message):
         await message.edit(f"❌ Ошибка: {str(e)}")
 
 
-@Client.on_message(fox_command("forward", "Forward Message", os.path.basename(__file__), "[chat_id] [message_id]") & fox_sudo())
+@Client.on_message(fox_command("forward", "ForwardMessage", os.path.basename(__file__), "[chat_id] [message_id]") & fox_sudo())
 async def forward_message(client, message):
     message = await who_message(client, message)
     from prefix import my_prefix
@@ -102,7 +102,7 @@ async def forward_message(client, message):
         await message.edit(f"❌ Ошибка: {str(e)}")
 
 
-@Client.on_message(fox_command("forwardall", "Forward All Messages", os.path.basename(__file__), "[chat_id]") & fox_sudo())
+@Client.on_message(fox_command("forwardall", "ForwardAllMessages", os.path.basename(__file__), "[chat_id]") & fox_sudo())
 async def forward_all_messages(client, message):
     message = await who_message(client, message)
     from prefix import my_prefix
@@ -125,7 +125,7 @@ async def forward_all_messages(client, message):
         await message.edit(f"❌ Ошибка при пересылке: {str(e)}")
 
 
-@Client.on_message(fox_command("dottext", "Dot Text", os.path.basename(__file__), "[text]") & fox_sudo())
+@Client.on_message(fox_command("dottext", "DotText", os.path.basename(__file__), "[text]") & fox_sudo())
 async def dot_text_format(client, message):
     message = await who_message(client, message)
 
