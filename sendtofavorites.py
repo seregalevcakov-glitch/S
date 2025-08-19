@@ -3,7 +3,7 @@ from command import fox_command, fox_sudo, who_message
 import os
 import asyncio
 
-@Client.on_message(fox_command("sendtofavorites", "SendToFavorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
+@Client.on_message(fox_command("sendtofavorites", "Send to Favorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
 async def send_to_favorites(client, message):
     message = await who_message(client, message)
     reply_message = message.reply_to_message
@@ -14,6 +14,24 @@ async def send_to_favorites(client, message):
             # Сначала пытаемся переслать сообщение как есть (от лица отправителя)
             try:
                 await client.forward_messages("me", reply_message.chat.id, reply_message.id)
+                
+                # Добавляем подпись к пересланному медиа
+                if reply_message.media:
+                    if reply_message.photo:
+                        await client.send_message("me", "📩 New Favorite Photo")
+                    elif reply_message.video:
+                        await client.send_message("me", "📩 New Favorite Video")
+                    elif reply_message.document:
+                        await client.send_message("me", "📩 New Favorite Media")
+                    elif reply_message.audio:
+                        await client.send_message("me", "📩 New Favorite Audio")
+                    elif reply_message.voice:
+                        await client.send_message("me", "📩 New Favorite Voice")
+                    elif reply_message.sticker:
+                        await client.send_message("me", "📩 New Favorite Sticker")
+                    elif reply_message.animation:
+                        await client.send_message("me", "📩 New Favorite GIF")
+                
                 await message.edit("📩 Sent to favorites.")
                 await asyncio.sleep(2)
                 await message.delete()
