@@ -1,18 +1,19 @@
 from pyrogram import Client, filters
-from command import fox_command, fox_sudo
+from command import fox_command
 import os
 
-@Client.on_message(fox_command("sendtofavorites", "Favorites", os.path.basename(__file__), "[Message/Reply]") & fox_sudo())
+@Client.on_message(fox_command("sendtofavorites", "Favorites", os.path.basename(__file__), "[Message/Reply]"))
 async def send_to_favorites(client, message):
     reply_message = message.reply_to_message
     
     try:
-        if reply_message: 
+        if reply_message:
             text_to_send = reply_message.text if reply_message.text else "Received media."
             await client.send_message("me", f"📩 New Favorite Message:\n{text_to_send}",
                                        reply_to_message_id=reply_message.message_id)
 
             if reply_message.media:
+                # Проверяем существует ли media и отправляем
                 await client.send_document("me", reply_message.document.file_id,
                                             caption="📩 New Favorite Media",
                                             reply_to_message_id=reply_message.message_id)
