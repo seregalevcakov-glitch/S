@@ -1,14 +1,16 @@
 from pyrogram import Client, filters
-from command import fox_command, who_message, sudousers  # Убедитесь, что sudousers импортирован правильно
+from command import fox_command, who_message, sudousers
+import os
 
-@Client.on_message(fox_command("sendtofavorites", 'Favorites', os.path.basename(__file__), "[Message/Reply]") & filters.user(sudousers))
+@Client.on_message(fox_command("sendtofavorites", "Favorites", os.path.basename(__file__), "[Message/Reply]") & filters.user(sudousers))
 async def send_to_favorites(client, message):
+    message = await who_message(client, message)
     reply_message = message.reply_to_message
     
     try:
-        # Если ответ на сообщение
+        # Обработка ответа на сообщение
         if reply_message:
-            text_to_send = reply_message.text if reply_message.text else "File/Media received."
+            text_to_send = reply_message.text if reply_message.text else "Received media."
             await client.send_message("me", f"📩 New Favorite Message:\n{text_to_send}",
                                        reply_to_message_id=reply_message.message_id)
                                        
