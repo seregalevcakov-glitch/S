@@ -1,10 +1,9 @@
-
 from pyrogram import Client, filters
 from command import fox_command, fox_sudo, who_message
 import os
 import asyncio
 
-@Client.on_message(fox_command("sendtofavorites", "Favorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
+@Client.on_message(fox_command("sendtofavorites", "Send to Favorites", os.path.basename(__file__), "[reply to message or text]") & fox_sudo())
 async def send_to_favorites(client, message):
     message = await who_message(client, message)
     reply_message = message.reply_to_message
@@ -63,11 +62,11 @@ async def send_to_favorites(client, message):
         if len(command_text) > 1:
             await client.send_message("me", f"📩 New Favorite Message:\n{command_text[1]}")
             await message.edit("📩 Sent to favorites.")
-            await asyncio.sleep(2)  # Показываем уведомление 2 секунды
+            await asyncio.sleep(2)
             await message.delete()
         else:
             await message.edit("📩 No text provided to send to favorites.")
-            await asyncio.sleep(2)  # Показываем уведомление 2 секунды
+            await asyncio.sleep(2)
             await message.delete()
         
     except Exception as e:
